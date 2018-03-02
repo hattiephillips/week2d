@@ -35,15 +35,11 @@
 		// convert the text to JSON
 		var earthquakejson = JSON.parse(earthquakedata);
 		// add the JSON layer onto the map - it will appear using the default icons
+		earthquakelayer = L.geoJson(earthquakejson).addTo(mymap);
 		var testMarkerRed = L.AwesomeMarkers.icon({
 		icon: 'play',
 		markerColor: 'red'
 		});
-		var testMarkerPink = L.AwesomeMarkers.icon({
-		icon: 'play',
-		markerColor: 'pink'
-		});
-		earthquakelayer = L.geoJson(earthquakejson).addTo(mymap);
 		// change the map zoom so that all the data is shown
 		mymap.fitBounds(earthquakelayer.getBounds());
 		}
