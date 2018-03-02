@@ -13,6 +13,11 @@
 		<style type="text/css">
 				#mapid {height:200px;}
 		</style>
+		<!-- the following links incorporate the CSS required for custom icon creation -->
+		<link rel="stylesheet" href=" ionicons.min.css">
+		<link rel="stylesheet" href="leaflet.awesome-markers.css">
+		<script src="leaflet.awesome-markers.js"></script>
+
 </head>
 <body>
 	<!--the mapid div will hold the map -->
@@ -48,6 +53,10 @@
 	// and add it to the map
 	L.geoJSON(geojsonFeature).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+""+geojsonFeature.properties.popupContent+"<b>");
     // add a point
+	var testMarkerPink = L.AwesomeMarkers.icon({
+	icon: 'play',
+	markerColor: 'pink'
+	});
     L.marker([51.5, -0.09]).addTo(mymap)
       .bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
     // add a circle
@@ -80,5 +89,10 @@
 	}
 	// now add the click event detector to the map
 	mymap.on('click', onMapClick);
+	L.geoJSON(geojsonFeature, {
+	pointToLayer: function (feature, latlng) {
+	return L.marker(latlng, {icon:testMarkerPink});
+	}
+	}).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+""+geojsonFeature.properties.popupContent+"<b>");
   </script>
 </html>
